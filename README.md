@@ -4,7 +4,7 @@
 [![Packagist](https://poser.pugx.org/guysolamour/laravel-cinetpay/d/total.svg)](https://packagist.org/packages/guysolamour/laravel-cinetpay)
 [![Packagist](https://img.shields.io/packagist/l/guysolamour/laravel-cinetpay.svg)](https://packagist.org/packages/guysolamour/laravel-cinetpay)
 
-Ce package est un wrapper autour du   pour effectuer des paiements en ligne.  Vous pouvez visiter leur [site internet](https://cinetpay.com)  pour en savoir plus sur leurs différents services.
+Ce package est un wrapper autour du  pour effectuer des paiements en ligne.  Vous pouvez visiter leur [site internet](https://cinetpay.com)  pour en savoir plus sur leurs différents services.
 
 ## Installation
 
@@ -15,8 +15,8 @@ composer require guysolamour/laravel-cinetpay
 
 ## Prerequisites
 
-- PHP >= 7.3
-- Laravel >= 6
+- PHP >= 8
+- Laravel >= 8
 
 
 ### Publish package assets
@@ -52,7 +52,7 @@ Vous devrez mettre le controller responsable de gérer ces routes dans le fichie
 ```
 Exemple de controller
 ```php
-namespace App\Http\Controllers\PaymentController;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Guysolamour\Cinetpay\Cinetpay;
@@ -139,17 +139,17 @@ ou uliser cette méthode , toujours depuis le fichier web.php
 
 Afficher le bouton de paiement sur une page.
 
-Depuis le controller, créez une instance de la classe **Guysolamour\Cinetpay\Cinetpay** en le personnalisant avec l'aide des différentes méthodes existantes sur la classe.
+Depuis le controller, créez une instance de la classe **\Guysolamour\Cinetpay\Cinetpay** en le personnalisant avec l'aide des différentes méthodes existantes sur la classe.
 
 Lorsque la fonction init est appellée, elle récupera les cles apis et les routes de redirection dans le fichier .env et construira l'instance de la classe pour vous avec toutes ces valeurs.
 
 ```php
-$cinetpay = Guysolamour\Cinetpay\Cinetpay::init();
+$cinetpay = \Guysolamour\Cinetpay\Cinetpay::init();
 ```
 Ajoutez l'identifiant de la transaction, cette valeur devra etre stocke dans votre application afin d'identififier et vérfier le statut de chaque paiement. Cette valeur est obligatoire et il existe plusieurs facons de le générer
 
 ```php
-$cinetpay = Guysolamour\Cinetpay\Cinetpay::init()
+$cinetpay = \Guysolamour\Cinetpay\Cinetpay::init()
   ->setTransactionId($transactionId) // must be unique
 ;
 
@@ -161,7 +161,7 @@ Il existe une méthode statique au sein de la classe qui génère des identifian
 
 ```php
 $transactionId= \Guysolamour\Cinetpay\Cinetpay::generateTransId(); // cette valeur devra etre stocke dans votre application afin d'identififier et vérfier le statut de chaque paiement
-$cinetpay = Guysolamour\Cinetpay\Cinetpay::init()
+$cinetpay = \Guysolamour\Cinetpay\Cinetpay::init()
   ->setTransactionId($transactionId) // must be unique
 ;
 
@@ -172,7 +172,7 @@ Ajoutez l'identifiant de l'acheteur pour faire la liaison entre le l'acheteur et
 $transactionId= \Guysolamour\Cinetpay\Cinetpay::generateTransId(); // cette valeur devra etre stocke dans votre application afin d'identififier et vérfier le statut de chaque paiement
 $user = \App\Models\User::first();
 
-$cinetpay = Guysolamour\Cinetpay\Cinetpay::init()
+$cinetpay = \Guysolamour\Cinetpay\Cinetpay::init()
   ->setTransactionId($transactionId) // must be unique
   ->setBuyerIdentifiant($user->email ) # or $user->id
 ;
@@ -185,10 +185,10 @@ Cette partie n'est pas obligatoire mais vous pouvez ajouter le numéro qui sera 
 $transactionId= \Guysolamour\Cinetpay\Cinetpay::generateTransId(); // cette valeur devra etre stocke dans votre application afin d'identififier et vérfier le statut de chaque paiement
 $user = \App\Models\User::first();
 
-$cinetpay = Guysolamour\Cinetpay\Cinetpay::init()
+$cinetpay = \Guysolamour\Cinetpay\Cinetpay::init()
   ->setTransactionId($transactionId) // must be unique
   ->setBuyerIdentifiant($user->email ) # or $user->id
-  ->setPhonePrefix('225') // for ivory coast
+  ->setPhonePrefixe('225') // for ivory coast
   ->setCelPhoneNum('0102030405')
 ;
 ```
@@ -200,7 +200,7 @@ Ajouter la désignation ou nom ou description du produit à acheter
 $transactionId= \Guysolamour\Cinetpay\Cinetpay::generateTransId(); // cette valeur devra etre stocke dans votre application afin d'identififier et vérfier le statut de chaque paiement
 
 $user = \App\Models\User::first();
-$cinetpay = Guysolamour\Cinetpay\Cinetpay::init()
+$cinetpay = \Guysolamour\Cinetpay\Cinetpay::init()
   ->setTransactionId($transactionId) // must be unique
   ->setBuyerIdentifiant($user->email ) # or $user->id
   ->setPhonePrefix('225') // for ivory coast
@@ -216,7 +216,7 @@ $transactionId= \Guysolamour\Cinetpay\Cinetpay::generateTransId(); // cette vale
 
 $user = \App\Models\User::first();
 
-$cinetpay = Guysolamour\Cinetpay\Cinetpay::init()
+$cinetpay = \Guysolamour\Cinetpay\Cinetpay::init()
   ->setTransactionId($transactionId) // must be unique
   ->setBuyerIdentifiant($user->email ) # or $user->id
   ->setPhonePrefix('225') // for ivory coast
@@ -236,7 +236,7 @@ return view('shop.checkout', ['cinetpay' => $cinetpay]);
 
 ```php
 $user = \App\Models\User::first();
-$cinetpay = Guysolamour\Cinetpay\Cinetpay::init()
+$cinetpay = \Guysolamour\Cinetpay\Cinetpay::init()
   ->setTransactionId($transactionId) // must be unique
   ->setBuyerIdentifiant($user->email ) # or $user->id
   ->setPhonePrefix('225') // for ivory coast
@@ -249,13 +249,13 @@ $cinetpay = Guysolamour\Cinetpay\Cinetpay::init()
 
 Dans le fichier
 ```php
-{{ $cinetpay }}
+{!! $cinetpay !!}
 
 ```
 Pour changer le label du bouton
 
 ```php
-{{ $cinetpay->show('buy quickly with mobile money') }}
+{!! $cinetpay->show('buy quickly with mobile money') !!}
 
 ```
 Pour changer l'apparence du boutn (css), il faudra retirer les styles par défaut

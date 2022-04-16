@@ -36,7 +36,7 @@ class Cinetpay extends \CinetPay\CinetPay
         $siteId = null,
         $apiKey = null,
         $mode = "PROD",
-        $version = 'v1',
+        $version = 'v1'
     )
     {
         $siteId = $siteId ?: $this->getSiteId();
