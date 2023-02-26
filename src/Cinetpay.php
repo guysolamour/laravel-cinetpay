@@ -79,9 +79,9 @@ class Cinetpay extends \CinetPay\CinetPay
     {
         if (is_null($data) && request(self::TRANSACTION_KEY)){
             $id = request(self::TRANSACTION_KEY);
-        }else if(is_array($data) && Arr::exists($data, self::TRANSACTION_KEY)){
+        }elseif (is_array($data) && Arr::exists($data, self::TRANSACTION_KEY)){
             $id = Arr::get($data, self::TRANSACTION_KEY);
-        }else if (ctype_digit($data)){
+        }elseif (ctype_digit($data)){
             $id = $data;
         }
 
