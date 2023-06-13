@@ -34,7 +34,7 @@ class Utils
             $routes[] = [
                 'method'   => $key,
                 'path'     => $value,
-                'verb'     => $key == 'cancel' ? 'get' : 'get',
+                'verb'     => $key == 'cancel' ? 'get' : 'post',
             ];
         }
 
